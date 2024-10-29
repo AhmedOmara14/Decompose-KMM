@@ -12,9 +12,10 @@ androidx-lifecycle = "2.8.3"
 androidx-material = "1.12.0"
 androidx-test-junit = "1.2.1"
 compose-multiplatform = "1.7.0"
+imageLoader = "1.9.0"
 junit = "4.13.2"
 kotlin = "2.0.21"
-kamel = "1.0.0"
+kamel = "0.9.4"
 koin = "4.0.0"
 koin-compose = "1.2.0-Beta5"
 koin-annotations = "1.4.0"
@@ -25,6 +26,10 @@ kotlinx-coroutines = "1.9.0"
 
 
 [libraries]
+image-loader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "imageLoader" }
+image-loader-extension-blur = { module = "io.github.qdsfdhvh:image-loader-extension-blur", version.ref = "imageLoader" }
+image-loader-extension-compose-resources = { module = "io.github.qdsfdhvh:image-loader-extension-compose-resources", version.ref = "imageLoader" }
+image-loader-extension-moko-resources = { module = "io.github.qdsfdhvh:image-loader-extension-moko-resources", version.ref = "imageLoader" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 kotlin-test-junit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }

@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.kotlinxSerialization)
 }
 
 kotlin {
@@ -64,6 +65,9 @@ kotlin {
             implementation(libs.koin.compose.viewmodel)
             api(libs.koin.annotations)
             implementation(libs.navigation.compose)
+
+            api(libs.image.loader)
+
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
