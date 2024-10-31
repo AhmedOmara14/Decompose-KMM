@@ -1,6 +1,7 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.targets.js.webpack.KotlinWebpackConfig
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -30,6 +31,19 @@ kotlin {
     }
 
     jvm("desktop")
+
+    js(IR){
+        moduleName ="KMM MODULE"
+        browser{
+
+            //for converting kotlin to js
+            commonWebpackConfig {
+                outputFileName = "kmm.js"
+                devServer = (devServer ?: KotlinWebpackConfig.DevServer()).copy()
+            }
+            binaries.executable() //it will execute the js file
+        }
+    }
 
     sourceSets {
         val desktopMain by getting
@@ -120,4 +134,8 @@ compose.desktop {
             packageVersion = "1.0.0"
         }
     }
+}
+
+compose.experimental{
+    web.application {       }
 }
