@@ -53,6 +53,9 @@ kotlin {
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
             implementation(libs.koin.android)
+
+            implementation(libs.decompose)
+            implementation(libs.decompose.extensions)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -81,6 +84,9 @@ kotlin {
             implementation(libs.navigation.compose)
 
             api(libs.image.loader)
+
+            implementation(libs.decompose)
+            implementation(libs.decompose.extensions)
 
         }
         iosMain.dependencies {

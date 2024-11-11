@@ -8,7 +8,7 @@ import org.jetbrains.skiko.wasm.onWasmReady
 fun main() {
     onWasmReady {
         CanvasBasedWindow("KMM") {
-            App()
+            App(root)
         }
     }
 }
