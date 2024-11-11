@@ -1,14 +1,34 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop.
+# Multiplatform Navigation with Decompose 
 
-* `/composeApp` is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - `commonMain` is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    `iosMain` would be the right folder for such calls.
+## Introduction
+This repository explores **Decompose**, a Kotlin Multiplatform library designed to streamline navigation and state management across iOS and Android applications. By leveraging Decompose, you can create a consistent, shared logic across platforms, reducing duplication and enhancing maintainability.
 
-* `/iosApp` contains iOS applications. Even if you’re sharing your UI with Compose Multiplatform, 
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
+## Features
+- **Multiplatform Navigation**: Simplifies handling of navigation across iOS and Android.
+- **State Management**: Provides shared state management, ensuring consistent user experiences.
+- **Integration with Kotlin Multiplatform**: Full compatibility with Kotlin's Multiplatform project structure.
 
+## Getting Started
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/AhmedOmara14/Decompose-KMM.git
+    ```
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+2. **Set up your environment**: Make sure you have the latest version of Kotlin and Android Studio installed, along with necessary KMM plugins.
+
+3. **Build and run the project**: Follow the instructions in your IDE to run the project on both Android and iOS.
+
+## Library Dependencies
+- **Decompose**: For navigation and state management.
+- **Kotlin Multiplatform**: For cross-platform compatibility.
+
+## Resources
+- [Decompose Documentation](https://arkivanov.github.io/Decompose/)
+- [Kotlin Multiplatform Documentation](https://kotlinlang.org/docs/multiplatform.html)
+
+## Contributing
+Contributions are welcome! Please submit a pull request for any improvements or feature additions.
+
+---
+
+Happy coding!
