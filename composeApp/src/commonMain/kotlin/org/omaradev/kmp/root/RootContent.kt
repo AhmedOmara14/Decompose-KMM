@@ -9,6 +9,7 @@ import com.arkivanov.decompose.extensions.compose.stack.animation.stackAnimation
 import org.omaradev.kmp.details.DetailsContent
 import org.omaradev.kmp.list.ListContent
 
+
 @Composable
 fun RootContent(
     component: RootComponent
@@ -22,7 +23,6 @@ fun RootContent(
             is RootComponentChild.ListChild -> ListContent(child.component)
             is RootComponentChild.DetailsChild -> DetailsContent(child.component)
         }
-
     }
 }
 

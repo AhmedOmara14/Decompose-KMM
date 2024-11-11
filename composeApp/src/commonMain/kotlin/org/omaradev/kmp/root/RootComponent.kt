@@ -18,6 +18,7 @@ interface RootComponent {
     val childStack: Value<ChildStack<*, RootComponentChild>>
 
     fun onBackPressure()
+
     fun navigateToDetails(item: Picsum)
 }
 
@@ -36,7 +37,6 @@ class DefaultRootComponent(
         childFactory = ::childFactory,
     )
 
-    @OptIn(DelicateDecomposeApi::class)
     fun childFactory(
         rootComponentConfiguration: RootComponentConfiguration,
         componentContext: ComponentContext
