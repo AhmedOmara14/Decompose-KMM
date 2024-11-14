@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Picsum(
+data class DummyPhotos(
     @SerialName("author")
     var author: String?,
     @SerialName("download_url")

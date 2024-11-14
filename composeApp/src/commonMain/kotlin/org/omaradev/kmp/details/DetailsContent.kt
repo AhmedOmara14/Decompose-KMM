@@ -7,6 +7,6 @@ import androidx.compose.runtime.Composable
 @Composable
 fun DetailsContent(component: DetailsComponent) {
     Column {
-        Text("Author: ${component.model.value.item.author}")
+        Text("Author: ${component.model.value.item.title}")
     }
 }

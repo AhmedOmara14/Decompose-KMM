@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.seiko.imageloader.rememberImagePainter
 import org.jetbrains.compose.ui.tooling.preview.Preview
-import org.omaradev.kmp.data.model.Picsum
+import org.omaradev.kmp.data.model.DummyPhotos
 
 
 @Composable
@@ -91,7 +91,7 @@ fun AppContent(homeViewModel: HomeViewModel = HomeViewModel()) {
 }
 
 @Composable
-fun ImageItem(picsum: Picsum) {
+fun ImageItem(DummyPhotos: DummyPhotos) {
     Card(
         modifier = Modifier.fillMaxWidth(),
         elevation = 4.dp,
@@ -99,7 +99,7 @@ fun ImageItem(picsum: Picsum) {
         shape = RoundedCornerShape(16.dp)
     ) {
         Column {
-            val painter = rememberImagePainter(picsum.downloadUrl)
+            val painter = rememberImagePainter(DummyPhotos.downloadUrl)
             Image(
                 modifier = Modifier.fillMaxWidth().height(100.dp).background(Color.Black),
                 painter = painter,
@@ -109,7 +109,7 @@ fun ImageItem(picsum: Picsum) {
 
             Spacer(Modifier.padding(8.dp))
 
-            picsum.author?.let {
+            DummyPhotos.author?.let {
                 Text(
                     textAlign = TextAlign.Center,
                     modifier = Modifier.fillMaxWidth(),

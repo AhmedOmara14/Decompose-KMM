@@ -6,10 +6,10 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import org.omaradev.kmp.data.model.Picsum
+import org.omaradev.kmp.data.model.DummyPhotos
 
 class HomeViewModel : ViewModel() {
-    private var _imagesStatus = MutableStateFlow<List<Picsum>>(emptyList())
+    private var _imagesStatus = MutableStateFlow<List<DummyPhotos>>(emptyList())
     val imagesStatus = _imagesStatus.asStateFlow()
 
     private var homeRepository = HomeRepository()

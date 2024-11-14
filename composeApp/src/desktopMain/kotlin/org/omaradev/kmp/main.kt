@@ -12,7 +12,8 @@ fun main() = application {
         onCloseRequest = ::exitApplication,
         title = "KMM",
     ) {
-        val root = DefaultRootComponent(DefaultComponentContext(LifecycleRegistry()), HomeViewModel())
+        val root =
+            DefaultRootComponent(DefaultComponentContext(LifecycleRegistry()), HomeViewModel())
         RootContent(root)
     }
 }

@@ -10,7 +10,7 @@ import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
 import kotlinx.serialization.Serializable
 import org.omaradev.kmp.HomeViewModel
-import org.omaradev.kmp.data.model.Picsum
+import org.omaradev.kmp.data.model.Product
 import org.omaradev.kmp.details.DefaultDetailsComponent
 import org.omaradev.kmp.list.DefaultListComponent
 
@@ -19,7 +19,7 @@ interface RootComponent {
 
     fun onBackPressure()
 
-    fun navigateToDetails(item: Picsum)
+    fun navigateToDetails(item: Product)
 }
 
 class DefaultRootComponent(
@@ -65,7 +65,7 @@ class DefaultRootComponent(
     }
 
     @OptIn(DelicateDecomposeApi::class)
-    override fun navigateToDetails(item: Picsum) {
+    override fun navigateToDetails(item: Product) {
         navigation.push(RootComponentConfiguration.Details(item))
     }
 
@@ -75,7 +75,7 @@ class DefaultRootComponent(
         data object List : RootComponentConfiguration
 
         @Serializable
-        data class Details(val item: Picsum) : RootComponentConfiguration
+        data class Details(val item: Product) : RootComponentConfiguration
     }
 }
 
