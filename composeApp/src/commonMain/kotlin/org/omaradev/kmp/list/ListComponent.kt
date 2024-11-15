@@ -10,34 +10,37 @@ import org.omaradev.kmp.HomeViewModel
 import org.omaradev.kmp.data.model.Product
 
 interface ListComponent {
-    val model: Value<Model>
+    val uiState: Value<UIState>
 
-    fun onItemClicked(product: Product)
+    fun onProductSelected(selectedProduct: Product)
 
-    data class Model(
-        val items: List<Product>
+    data class UIState(
+        val productList: List<Product>
     )
 }
 
 class DefaultListComponent(
     componentContext: ComponentContext,
     private val homeViewModel: HomeViewModel,
-    val onClicked: (product: Product) -> Unit
+    private val onProductSelectedCallback: (selectedProduct: Product, allProducts: List<Product>) -> Unit
 ) : ListComponent, ComponentContext by componentContext {
 
-    private var _model = MutableValue(ListComponent.Model(emptyList()))
-    override val model: Value<ListComponent.Model> = _model
+    private val _uiState = MutableValue(ListComponent.UIState(emptyList()))
+    override val uiState: Value<ListComponent.UIState> = _uiState
 
-    override fun onItemClicked(product: Product) {
-        onClicked(product)
+    override fun onProductSelected(selectedProduct: Product) {
+        onProductSelectedCallback(selectedProduct, _uiState.value.productList)
     }
 
     init {
+        observeProductListUpdates()
+    }
+
+    private fun observeProductListUpdates() {
         CoroutineScope(Dispatchers.Default).launch {
-            homeViewModel.imagesStatus.collect {
-                _model.value = ListComponent.Model(it)
+            homeViewModel.imagesStatus.collect { products ->
+                _uiState.value = ListComponent.UIState(products)
             }
         }
     }
-
 }

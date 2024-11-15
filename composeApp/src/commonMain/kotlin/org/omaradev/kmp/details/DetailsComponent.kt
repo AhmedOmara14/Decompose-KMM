@@ -11,14 +11,15 @@ interface DetailsComponent {
     fun onBackPressure()
 
     data class Model(
-        var item: Product
+        var item: Product,
+        var AllItems :List<Product>
     )
 }
 
 class DefaultDetailsComponent(
-    componentContext: ComponentContext, private val onBack: () -> Unit, item: Product
+    componentContext: ComponentContext, private val onBack: () -> Unit, item: Product,items: List<Product>
 ) : DetailsComponent, ComponentContext by componentContext {
-    private var _model = MutableValue(DetailsComponent.Model(item))
+    private var _model = MutableValue(DetailsComponent.Model(item,items))
     override val model: Value<DetailsComponent.Model> = _model
 
     override fun onBackPressure() {

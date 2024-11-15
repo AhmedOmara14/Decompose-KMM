@@ -15,11 +15,11 @@ import org.omaradev.kmp.details.DefaultDetailsComponent
 import org.omaradev.kmp.list.DefaultListComponent
 
 interface RootComponent {
-    val childStack: Value<ChildStack<*, RootComponentChild>>
+    val childStack: Value<ChildStack<*, RootChild>>
 
-    fun onBackPressure()
+    fun handleBackPress()
 
-    fun navigateToDetails(item: Product)
+    fun navigateToDetails(selectedProduct: Product, allProducts: List<Product>)
 }
 
 class DefaultRootComponent(
@@ -27,56 +27,75 @@ class DefaultRootComponent(
     private val homeViewModel: HomeViewModel
 ) : RootComponent, ComponentContext by componentContext {
 
-    private val navigation = StackNavigation<RootComponentConfiguration>()
+    private val navigation = StackNavigation<RootConfiguration>()
 
-    override val childStack: Value<ChildStack<*, RootComponentChild>> = childStack(
+    override val childStack: Value<ChildStack<*, RootChild>> = childStack(
         source = navigation,
-        serializer = RootComponentConfiguration.serializer(),
-        initialConfiguration = RootComponentConfiguration.List,
+        serializer = RootConfiguration.serializer(),
+        initialConfiguration = RootConfiguration.ProductList,
         handleBackButton = true,
-        childFactory = ::childFactory,
+        childFactory = ::createChild,
     )
 
-    fun childFactory(
-        rootComponentConfiguration: RootComponentConfiguration,
+    /**
+     * Factory method to create child components based on the configuration.
+     */
+    private fun createChild(
+        configuration: RootConfiguration,
         componentContext: ComponentContext
-    ): RootComponentChild {
-        return when (rootComponentConfiguration) {
-            is RootComponentConfiguration.List -> RootComponentChild.ListChild(
-                DefaultListComponent(
-                    componentContext = componentContext,
-                    homeViewModel = homeViewModel,
-                    onClicked = ::navigateToDetails
-                )
+    ): RootChild = when (configuration) {
+        is RootConfiguration.ProductList -> RootChild.ProductListChild(
+            DefaultListComponent(
+                componentContext = componentContext,
+                homeViewModel = homeViewModel,
+                onProductSelectedCallback = ::navigateToDetails
             )
-
-            is RootComponentConfiguration.Details -> RootComponentChild.DetailsChild(
-                DefaultDetailsComponent(
-                    componentContext = componentContext,
-                    onBack = ::onBackPressure,
-                    item = rootComponentConfiguration.item
-                )
+        )
+        is RootConfiguration.ProductDetails -> RootChild.ProductDetailsChild(
+            DefaultDetailsComponent(
+                componentContext = componentContext,
+                onBack = ::handleBackPress,
+                item = configuration.selectedProduct,
+                items = configuration.allProducts
             )
-        }
+        )
     }
 
-    override fun onBackPressure() {
+    /**
+     * Handles back navigation in the component stack.
+     */
+    override fun handleBackPress() {
         navigation.pop()
     }
 
+    /**
+     * Navigates to the product details screen.
+     */
     @OptIn(DelicateDecomposeApi::class)
-    override fun navigateToDetails(item: Product) {
-        navigation.push(RootComponentConfiguration.Details(item))
+    override fun navigateToDetails(selectedProduct: Product, allProducts: List<Product>) {
+        navigation.push(RootConfiguration.ProductDetails(selectedProduct, allProducts))
     }
 
+    /**
+     * Sealed class for representing navigation configurations.
+     */
     @Serializable
-    sealed interface RootComponentConfiguration {
+    sealed interface RootConfiguration {
         @Serializable
-        data object List : RootComponentConfiguration
+        object ProductList : RootConfiguration
 
         @Serializable
-        data class Details(val item: Product) : RootComponentConfiguration
+        data class ProductDetails(
+            val selectedProduct: Product,
+            val allProducts: List<Product>
+        ) : RootConfiguration
     }
 }
 
-
+/**
+ * Sealed class for child components in the root stack.
+ */
+sealed interface RootChild {
+    data class ProductListChild(val component: DefaultListComponent) : RootChild
+    data class ProductDetailsChild(val component: DefaultDetailsComponent) : RootChild
+}

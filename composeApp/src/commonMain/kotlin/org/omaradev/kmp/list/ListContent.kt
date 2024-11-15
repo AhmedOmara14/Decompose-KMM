@@ -3,7 +3,16 @@ package org.omaradev.kmp.list
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -12,7 +21,12 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Card
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -22,7 +36,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.arkivanov.decompose.extensions.compose.subscribeAsState
-import com.arkivanov.decompose.value.MutableValue
 import com.seiko.imageloader.rememberImagePainter
 import org.omaradev.kmp.data.model.Product
 
@@ -30,17 +43,18 @@ import org.omaradev.kmp.data.model.Product
 fun ListContent(
     listComponent: ListComponent
 ) {
-    val images = listComponent.model.subscribeAsState()
+    val images = listComponent.uiState.subscribeAsState()
     Content(images) {
-        listComponent.onItemClicked(it)
+        listComponent.onProductSelected(it)
     }
 }
 
 @Composable
-fun Content(images: State<ListComponent.Model>, onItemClicked: (product: Product) -> Unit) {
+fun Content(images: State<ListComponent.UIState>, onItemClicked: (product: Product) -> Unit) {
     var query by remember { mutableStateOf("") }
 
-    val filteredItems = images.value.items.filter {
+    val filteredItems = images.value.productList.filter {
+        it.title?.contains("Charger") == false &&
         it.title?.contains(query, ignoreCase = true) == true
     }
 
