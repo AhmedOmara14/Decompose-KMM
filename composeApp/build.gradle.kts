@@ -1,3 +1,5 @@
+import co.touchlab.skie.configuration.EnumInterop
+import co.touchlab.skie.configuration.SealedInterop
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
@@ -9,6 +11,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.kotlinxSerialization)
+    alias(libs.plugins.skie)
 }
 
 kotlin {
@@ -27,6 +30,9 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "ComposeApp"
             isStatic = true
+
+            export(libs.decompose)
+            export("com.arkivanov.essenty:lifecycle:2.2.1")
         }
     }
 
@@ -91,6 +97,10 @@ kotlin {
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
+
+            api(libs.decompose)
+            api("com.arkivanov.essenty:lifecycle:2.2.1")
+
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -98,6 +108,16 @@ kotlin {
         }
     }
 }
+
+skie {
+    features {
+        group("co.touchlab.skie.types") {
+            SealedInterop.Enabled(false)
+            EnumInterop.Enabled(false)
+        }
+    }
+}
+
 
 android {
     namespace = "org.omaradev.kmp"

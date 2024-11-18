@@ -5,17 +5,12 @@ import androidx.compose.ui.window.ComposeUIViewController
 import com.arkivanov.decompose.DefaultComponentContext
 import com.arkivanov.essenty.lifecycle.LifecycleRegistry
 import org.omaradev.kmp.root.DefaultRootComponent
+import org.omaradev.kmp.root.RootComponent
 import org.omaradev.kmp.root.RootContent
 
-fun MainViewController() = ComposeUIViewController {
+fun MainViewController(rootComponent: RootComponent) = ComposeUIViewController {
     CompositionLocalProvider {
-
-        val lifecycle = LifecycleRegistry()
-        lifecycle.subscribe(LifecycleCallbackImpl())
-
-        val root =
-            DefaultRootComponent(DefaultComponentContext(LifecycleRegistry()), HomeViewModel())
-        RootContent(root)
+        RootContent(rootComponent)
     }
 }
 

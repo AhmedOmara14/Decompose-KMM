@@ -24,6 +24,7 @@ ksp = "1.9.23-1.0.20"
 ktor = "3.0.0"
 kotlinx-coroutines = "1.9.0"
 decompose = "3.2.2"
+skie = "0.9.3"
 
 
 [libraries]
@@ -69,3 +70,4 @@ kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref =
 kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+skie = { id = "co.touchlab.skie", version.ref = "skie" }
