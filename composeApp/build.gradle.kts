@@ -62,6 +62,9 @@ kotlin {
 
             implementation(libs.decompose)
             implementation(libs.decompose.extensions)
+
+            implementation(libs.koin.android)
+
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -94,12 +97,13 @@ kotlin {
             implementation(libs.decompose)
             implementation(libs.decompose.extensions)
 
+            implementation(libs.koin.core)
         }
         iosMain.dependencies {
             implementation(libs.ktor.client.darwin)
 
             api(libs.decompose)
-            api("com.arkivanov.essenty:lifecycle:2.2.1")
+            api(libs.essenty)
 
         }
         desktopMain.dependencies {

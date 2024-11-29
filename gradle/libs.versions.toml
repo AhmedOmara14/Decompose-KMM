@@ -25,11 +25,12 @@ ktor = "3.0.0"
 kotlinx-coroutines = "1.9.0"
 decompose = "3.2.2"
 skie = "0.9.3"
-
+essenty = "2.2.1"
 
 [libraries]
 image-loader = { module = "io.github.qdsfdhvh:image-loader", version.ref = "imageLoader" }
 decompose = { module = "com.arkivanov.decompose:decompose", version.ref = "decompose" }
+essenty = { module = "com.arkivanov.essenty:lifecycle", version.ref = "essenty" }
 decompose-extensions = { module = "com.arkivanov.decompose:extensions-compose", version.ref = "decompose" }
 image-loader-extension-blur = { module = "io.github.qdsfdhvh:image-loader-extension-blur", version.ref = "imageLoader" }
 image-loader-extension-compose-resources = { module = "io.github.qdsfdhvh:image-loader-extension-compose-resources", version.ref = "imageLoader" }

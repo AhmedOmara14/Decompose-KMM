@@ -8,11 +8,11 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.omaradev.kmp.data.model.Product
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel(
+    private val homeRepository: HomeRepository
+) : ViewModel() {
     private var _imagesStatus = MutableStateFlow<List<Product>>(emptyList())
     val imagesStatus = _imagesStatus.asStateFlow()
-
-    private var homeRepository = HomeRepository()
 
     init {
         viewModelScope.launch {
